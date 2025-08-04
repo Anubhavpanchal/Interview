@@ -18,6 +18,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.11.0",
     "formik": "^2.4.6",
+    "interview": "file:..",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.6",
     "react": "^19.1.0",
