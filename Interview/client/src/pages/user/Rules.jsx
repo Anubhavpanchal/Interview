@@ -12,14 +12,23 @@ const Rules = () => {
     if (paramQuizId) setQuizId(paramQuizId);
   }, [paramQuizId]);
 
-  const handleStart = () => {
-    if (!quizId.trim()) return toast.error("Quiz ID is required.");
+  const handleStart = async () => {
+  if (!quizId.trim()) return toast.error("Quiz ID is required.");
+  try {
+    const res = await axios.get(`/api/quizzes/${quizId.trim()}`);
+    if (!res.data || !res.data._id) {
+      toast.error("Invalid Quiz ID. Please check and try again.");
+      return;
+    }
     toast.info("Please enable fullscreen before continuing.");
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen();
     }
     navigate(`/login?quizId=${quizId.trim()}`);
-  };
+  } catch (err) {
+    toast.error("Invalid Quiz ID. Please check and try again.");
+  }
+};
 
   return (
     <Box className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-blue-200 px-4 py-10">
