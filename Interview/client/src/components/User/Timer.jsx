@@ -6,8 +6,10 @@ const Timer = ({ duration, onExpire }) => {
 
   useEffect(() => {
     setSeconds(duration);
-    if (duration <= 0) return;
+  }, [duration]); // Only reset when duration changes
 
+  useEffect(() => {
+    if (duration <= 0) return;
     const interval = setInterval(() => {
       setSeconds((s) => {
         if (s <= 1) {
